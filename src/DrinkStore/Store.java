@@ -24,7 +24,7 @@ public class Store {
 			System.out.println("(2)查看購物車");
 			System.out.println("(0)結帳並退出系統");
 			System.out.println("請選擇功能 [0,1,2]:");
-
+			
 			String sel = sc.nextLine();
 			switch (sel) {
 			case "1":
@@ -40,10 +40,14 @@ public class Store {
 			case "0":
 				Menu menu2 = new Menu(drink, sugar, ice, cart);
 				menu2.showPerchase();
+				sc.close();
 				break;
+			default:
+				System.out.println("選擇無效");
+				System.out.println("請選擇功能 [0,1,2]:");
+				continue;
 			}
 		}
-
 	}
 
 }

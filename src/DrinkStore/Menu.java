@@ -30,6 +30,11 @@ public class Menu {
 		System.out.println("********************");
 		System.out.println("請選擇飲料編號:");
 		int select = sc.nextInt();
+		while(select<1 || select>drink.length)
+		{
+			System.out.println("輸入錯誤，再次輸入");
+			select = sc.nextInt();
+		}
 
 		System.out.println("(1)正常冰 (2)少冰 (3)去冰");
 		System.out.println("請選擇飲料冰量[1,2,3]:");
@@ -51,8 +56,10 @@ public class Menu {
 		System.out.println("請輸入數量:");
 		count = sc.nextInt();
 
-		while (count < 0)
+		while (count <= 0) {
+			System.out.println("輸入錯誤，再次輸入");
 			count = sc.nextInt();
+		}
 		String name = drink[select - 1].getName();
 		String iceS = ice[selectIce - 1].getIce();
 		String sugarS = sugar[selectSugar - 1].getSugar();
@@ -66,8 +73,6 @@ public class Menu {
 					sugar[selectSugar - 1].getSugar(), count);
 
 			cart.add(item);
-			System.out.println("debug:");
-			cart.stream().forEach(x -> System.out.println(x.getTotalPrice()));
 		}
 
 	}
@@ -78,10 +83,7 @@ public class Menu {
 				System.out.println("購物車含有重複品項，因此以合併至同一項目");
 				carts.setCount(carts.getCount() + count);
 				carts.setTotalPrice(carts.getCount() * carts.getPrice());
-				cart.stream().forEach(x -> System.out.println("debug:" + x.getName() + " " + x.getSugar() + " "
-						+ x.getIce() + " " + x.getCount() + " " + x.getTotalPrice()));
 				tag = true;
-
 				return;
 			}
 		}
@@ -91,7 +93,7 @@ public class Menu {
 		System.out.println("編號		品名		冰量		甜度		數量		單價		總價");
 		int id = 1;
 		for (Item carts : cart) {
-			System.out.printf("%-10d%s%15s%15s%15s%15s$%15s$%n", id, carts.getName(), carts.getIce(), carts.getSugar(),
+			System.out.printf("%-10d%10s%-10s%s%-15s%s%15s%15s$%15s$%n", id, carts.getName()," ", carts.getIce()," " ,carts.getSugar(),
 					carts.getCount(), carts.getPrice(), carts.getTotalPrice());
 			id++;
 		}
@@ -100,6 +102,14 @@ public class Menu {
 		if (sel == 0) {
 			Store.main(null);
 		}
+		while(sel<1 || sel>cart.size()) {
+			System.out.println("無效輸入，輸入0退出");
+			sel = sc.nextInt();
+			if (sel == 0) {
+				Store.main(null);
+			}
+		}
+			
 
 		System.out.println("(1)編輯 (2)刪除 (0)取消動作 請選擇 [1,2,3]:");
 		int sel2 = sc.nextInt();
