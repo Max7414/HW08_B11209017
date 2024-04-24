@@ -2,11 +2,16 @@ package DrinkStore;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Store {
 
-	void order() {
-
+	static boolean isnumber(String sel) {
+		String regex = "\\d+";
+		Pattern pattern=Pattern.compile(regex);
+		Matcher m = pattern.matcher(sel);
+		return m.matches();
 	}
 
 	static Drink drink[] = { new Drink(35, "珍珠紅茶"), new Drink(45, "珍珠奶茶"), new Drink(60, "柳丁綠茶") };

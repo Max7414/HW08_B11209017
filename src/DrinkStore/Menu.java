@@ -29,37 +29,80 @@ public class Menu {
 		}
 		System.out.println("********************");
 		System.out.println("請選擇飲料編號:");
-		int select = sc.nextInt();
-		while(select<1 || select>drink.length)
-		{
-			System.out.println("輸入錯誤，再次輸入");
-			select = sc.nextInt();
+		int select;
+
+		while (true) {
+			if (sc.hasNextInt()) {
+				select = sc.nextInt();
+				if (select >= 1 && select <= drink.length) {
+					break; // Valid input, exit loop
+				} else {
+					System.out.println("輸入錯誤，請再次輸入:");
+				}
+			} else {
+				System.out.println("輸入錯誤，請輸入有效的整數:");
+				sc.next(); // Discard non-integer input
+			}
 		}
 
 		System.out.println("(1)正常冰 (2)少冰 (3)去冰");
 		System.out.println("請選擇飲料冰量[1,2,3]:");
-		int selectIce = sc.nextInt();
-		while (selectIce < 1 || selectIce > 3) {
-			System.out.println("輸入錯誤，再次輸入");
-			selectIce = sc.nextInt();
+		int selectIce;
+
+		while (true) {
+			if (sc.hasNextInt()) {
+				selectIce = sc.nextInt();
+				if (selectIce >= 1 && selectIce <= 3) {
+					break; // Valid input, exit loop
+				} else {
+					System.out.println("輸入錯誤，請再次輸入:");
+				}
+			} else {
+				System.out.println("輸入錯誤，請輸入有效的整數:");
+				sc.next(); // Discard non-integer input
+			}
 		}
 
 		System.out.println("(1)正常糖 (2)少糖 (3)半糖 (4)微糖 (5)無糖");
 		System.out.println("請選擇飲料甜度[1,2,3,4,5]:");
-		int selectSugar = sc.nextInt();
-		while (selectSugar < 1 || selectSugar > 5) {
-			System.out.println("輸入錯誤，再次輸入");
-			selectSugar = sc.nextInt();
+		
+		
+		int selectSugar;
+		while (true) {
+			if (sc.hasNextInt()) {
+				selectSugar = sc.nextInt();
+				if (selectSugar >= 0) {
+					break; // Valid input, exit loop
+				} else {
+					System.out.println("輸入錯誤，請再次輸入:");
+				}
+			} else {
+				System.out.println("輸入錯誤，請輸入有效的整數:");
+				sc.next(); // Discard non-integer input
+			}
 		}
-		int count = 0;
+		
+		
+		
+		
 
 		System.out.println("請輸入數量:");
-		count = sc.nextInt();
+		int count;
 
-		while (count <= 0) {
-			System.out.println("輸入錯誤，再次輸入");
-			count = sc.nextInt();
+		while (true) {
+			if (sc.hasNextInt()) {
+				count = sc.nextInt();
+				if (count >= 0) {
+					break; // Valid input, exit loop
+				} else {
+					System.out.println("輸入錯誤，請再次輸入:");
+				}
+			} else {
+				System.out.println("輸入錯誤，請輸入有效的整數:");
+				sc.next(); // Discard non-integer input
+			}
 		}
+
 		String name = drink[select - 1].getName();
 		String iceS = ice[selectIce - 1].getIce();
 		String sugarS = sugar[selectSugar - 1].getSugar();
@@ -93,8 +136,8 @@ public class Menu {
 		System.out.println("編號		品名		冰量		甜度		數量		單價		總價");
 		int id = 1;
 		for (Item carts : cart) {
-			System.out.printf("%-10d%10s%-10s%s%-15s%s%15s%15s$%15s$%n", id, carts.getName()," ", carts.getIce()," " ,carts.getSugar(),
-					carts.getCount(), carts.getPrice(), carts.getTotalPrice());
+			System.out.printf("%-10d%10s%-10s%s%-15s%s%15s%15s$%15s$%n", id, carts.getName(), " ", carts.getIce(), " ",
+					carts.getSugar(), carts.getCount(), carts.getPrice(), carts.getTotalPrice());
 			id++;
 		}
 		System.out.println("請輸入飲料編號進行修改，輸入0則回到上一層:");
@@ -102,17 +145,43 @@ public class Menu {
 		if (sel == 0) {
 			Store.main(null);
 		}
-		while(sel<1 || sel>cart.size()) {
+		while (sel < 1 || sel > cart.size()) {
 			System.out.println("無效輸入，輸入0退出");
 			sel = sc.nextInt();
 			if (sel == 0) {
 				Store.main(null);
 			}
 		}
-			
 
 		System.out.println("(1)編輯 (2)刪除 (0)取消動作 請選擇 [1,2,3]:");
-		int sel2 = sc.nextInt();
+		//int sel2 = sc.nextInt();
+		int sel2;
+		
+		
+		while (true) {
+			if (sc.hasNextInt()) {
+				sel2 = sc.nextInt();
+				if (sel2 >= 0) {
+					break; // Valid input, exit loop
+				} else {
+					System.out.println("輸入錯誤，請再次輸入:");
+				}
+			} else {
+				System.out.println("輸入錯誤，請輸入有效的整數:");
+				sc.next(); // Discard non-integer input
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		switch (sel2) {
 		case 1:
@@ -131,26 +200,28 @@ public class Menu {
 			case 2:
 				System.out.println("請選擇飲料冰量[1,2,3]:");
 				int selIce = sc.nextInt();
-				
-				verifyRepeat(cart.get(sel-1).getName(), ice[selIce - 1].getIce(), cart.get(sel-1).getSugar(),  cart.get(sel-1).getCount());
-				if(!tag)
+
+				verifyRepeat(cart.get(sel - 1).getName(), ice[selIce - 1].getIce(), cart.get(sel - 1).getSugar(),
+						cart.get(sel - 1).getCount());
+				if (!tag)
 					cart.get(sel - 1).setIce(ice[selIce - 1].getIce());
 				else
-					cart.remove(sel-1);
-				
+					cart.remove(sel - 1);
+
 				System.out.println("已成功變更!");
 				break;
 			case 3:
 				System.out.println("請選擇飲料甜度[1,2,3,4,5]:");
 				int selSugar = sc.nextInt();
 				cart.get(sel - 1).setSugar(sugar[selSugar - 1].getSugar());
-				
-				verifyRepeat(cart.get(sel-1).getName(), cart.get(sel-1).getIce(), sugar[selSugar - 1].getSugar(),  cart.get(sel-1).getCount());
-				if(!tag)
+
+				verifyRepeat(cart.get(sel - 1).getName(), cart.get(sel - 1).getIce(), sugar[selSugar - 1].getSugar(),
+						cart.get(sel - 1).getCount());
+				if (!tag)
 					cart.get(sel - 1).setSugar(sugar[selSugar - 1].getSugar());
 				else
-					cart.remove(sel-1);
-				
+					cart.remove(sel - 1);
+
 				System.out.println("已成功變更!");
 				break;
 			}
